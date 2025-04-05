@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Warehouse CMS - Audiovisual</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-key.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?audiovisual,technology') center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        .card {
+            background: #1f1f1f;
+            color: white;
+            border: none;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(255, 0, 0, 0.5);
+        }
+        .navbar {
+            background-color: #000;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ff0000 !important;
+        }
+        /* Animasi Tombol Logout */
+        .btn-logout {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-logout:active {
+            background-color: #ff0000 !important;
+            color: white !important;
+        }
+        footer {
+            background-color: #000;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-danger" href="/">Warehouse CMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/products">Products</a>
+                    <a class="nav-link" href="/categories">Categories</a>
+                    <a class="btn btn-logout ms-3" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h3>Welcome, {{ .nama_lengkap }}</h3>
+    </div>
+
+    <div class="hero">
+        <div data-aos="fade-up">Warehouse CMS - Managing Your Audiovisual Equipment</div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row text-center">
+            <div class="col-md-4" data-aos="fade-right">
+                <div class="card p-3 shadow">
+                    <i class="fas fa-film fa-3x text-danger"></i>
+                    <h4 class="mt-3">Equipment Management</h4>
+                    <p>Track and organize audiovisual inventory efficiently.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="card p-3 shadow">
+                    <i class="fas fa-truck-loading fa-3x text-danger"></i>
+                    <h4 class="mt-3">Logistics</h4>
+                    <p>Monitor stock movements and shipments seamlessly.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-left">
+                <div class="card p-3 shadow">
+                    <i class="fas fa-users-cog fa-3x text-danger"></i>
+                    <h4 class="mt-3">User Roles & Access</h4>
+                    <p>Manage team access with different permission levels.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-white">
+        <p>&copy; 2025 Warehouse CMS. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
