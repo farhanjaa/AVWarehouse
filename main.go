@@ -9,16 +9,24 @@ import (
 	authcontroller "github.com/farhanjaa/AVWarehouse/controllers/authcontroller"
 	"github.com/farhanjaa/AVWarehouse/controllers/categorycontroller"
 	"github.com/farhanjaa/AVWarehouse/controllers/productcontroller"
+	"github.com/farhanjaa/AVWarehouse/models"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	// Menghubungkan ke database tanpa mengirimkan connection string secara eksplisit
-	_, err := config.ConnectDB() // Sekarang tidak perlu mengirim parameter
+	// Menghubungkan ke database
+	db, err := config.ConnectDB()
 	if err != nil {
 		log.Fatal("Database connection failed:", err)
 	}
+
+	// Inisialisasi UserModel dan AuthController
+	userModel, err := models.NewUserModel(db)
+	if err != nil {
+		log.Fatal("Failed to initialize UserModel:", err)
+	}
+	authCtrl := &authcontroller.AuthController{UserModel: userModel}
 
 	// Mengambil port dari environment variable yang disediakan oleh Railway
 	port := os.Getenv("PORT")
@@ -27,10 +35,10 @@ func main() {
 	}
 
 	// Menyiapkan route HTTP
-	http.HandleFunc("/", authcontroller.Index)
-	http.HandleFunc("/login", authcontroller.Login)
-	http.HandleFunc("/logout", authcontroller.Logout)
-	http.HandleFunc("/register", authcontroller.Register)
+	http.HandleFunc("/", authCtrl.Index)
+	http.HandleFunc("/login", authCtrl.Login)
+	http.HandleFunc("/logout", authCtrl.Logout)
+	http.HandleFunc("/register", authCtrl.Register)
 
 	// Routes untuk kategori
 	http.HandleFunc("/categories", categorycontroller.Index)

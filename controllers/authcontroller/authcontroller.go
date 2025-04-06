@@ -19,7 +19,10 @@ type UserInput struct {
 	Password string `validate:"required"`
 }
 
-var userModel = models.NewUserModel()
+type AuthController struct {
+	UserModel *models.UserModel
+}
+
 var validation = libraries.NewValidation()
 
 // **Helper function untuk mengecek keberadaan file template**
@@ -50,7 +53,7 @@ func renderTemplate(w http.ResponseWriter, filepath string, data interface{}) {
 }
 
 // **Index (Homepage)**
-func Index(w http.ResponseWriter, r *http.Request) {
+func (ac *AuthController) Index(w http.ResponseWriter, r *http.Request) {
 	session, err := config.Store.Get(r, config.SESSION_ID)
 	if err != nil {
 		log.Println("Error getting session:", err)
@@ -72,7 +75,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 // **Login**
-func Login(w http.ResponseWriter, r *http.Request) {
+func (ac *AuthController) Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		renderTemplate(w, "views/login/login.html", nil)
 		return
@@ -98,7 +101,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	// Cek apakah user ada di database
 	var user entities.User
-	err := userModel.Where(&user, "username", userInput.Username)
+	err := ac.UserModel.Where(&user, "username", userInput.Username)
 	if err != nil {
 		renderTemplate(w, "views/login/login.html", map[string]interface{}{"error": "Username atau password salah!"})
 		return
@@ -133,7 +136,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 // **Logout**
-func Logout(w http.ResponseWriter, r *http.Request) {
+func (ac *AuthController) Logout(w http.ResponseWriter, r *http.Request) {
 	session, err := config.Store.Get(r, config.SESSION_ID)
 	if err != nil {
 		log.Println("Error getting session:", err)
@@ -155,7 +158,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 }
 
 // **Register**
-func Register(w http.ResponseWriter, r *http.Request) {
+func (ac *AuthController) Register(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		renderTemplate(w, "views/login/register.html", nil)
 		return
@@ -184,12 +187,12 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	// **Cek apakah username/email sudah ada**
 	var existingUser entities.User
-	if err := userModel.Where(&existingUser, "username", user.Username); err == nil && existingUser.Username != "" {
+	if err := ac.UserModel.Where(&existingUser, "username", user.Username); err == nil && existingUser.Username != "" {
 		renderTemplate(w, "views/login/register.html", map[string]interface{}{"error": "Username sudah digunakan!", "user": user})
 		return
 	}
 
-	if err := userModel.Where(&existingUser, "email", user.Email); err == nil && existingUser.Email != "" {
+	if err := ac.UserModel.Where(&existingUser, "email", user.Email); err == nil && existingUser.Email != "" {
 		renderTemplate(w, "views/login/register.html", map[string]interface{}{"error": "Email sudah digunakan!", "user": user})
 		return
 	}
@@ -204,7 +207,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	user.Password = string(hashPassword)
 
 	// **Simpan user ke database & dapatkan lastInsertId**
-	lastInsertId, err := userModel.Create(user)
+	lastInsertId, err := ac.UserModel.Create(user)
 	if err != nil {
 		log.Println("Error inserting user:", err)
 		http.Error(w, "Server error", http.StatusInternalServerError)

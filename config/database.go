@@ -2,8 +2,8 @@ package config
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
-	"log"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -17,18 +17,18 @@ func ConnectDB() (*sql.DB, error) {
 	// Ambil connection string dari environment variable yang disediakan Railway
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
-		log.Fatal("DATABASE_URL is not set")
+		return nil, errors.New("DATABASE_URL is not set")
 	}
 
 	// Membuka koneksi ke database menggunakan connection string yang didapat dari Railway
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to open database connection: %w", err)
 	}
 
 	// Cek koneksi ke database
 	if err = db.Ping(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to ping database: %w", err)
 	}
 
 	fmt.Println("✅ Database Connected!")
