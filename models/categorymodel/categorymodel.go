@@ -1,11 +1,12 @@
 package categorymodel
 
 import (
-	"1stproject/config"
-	"1stproject/entities"
 	"database/sql"
 	"log"
 	"os"
+
+	"github.com/farhanjaa/AVWarehouse/config"
+	"github.com/farhanjaa/AVWarehouse/entities"
 
 	"github.com/joho/godotenv"
 )

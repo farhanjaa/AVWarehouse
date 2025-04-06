@@ -1,10 +1,11 @@
 package models
 
 import (
-	"1stproject/config"
-	"1stproject/entities"
 	"database/sql"
 	"errors"
+
+	"github.com/farhanjaa/AVWarehouse/config"
+	"github.com/farhanjaa/AVWarehouse/entities"
 )
 
 type UserModel struct {

@@ -1,10 +1,11 @@
 package libraries
 
 import (
-	"1stproject/config"
 	"database/sql"
 	"reflect"
 	"strings"
+
+	"github.com/farhanjaa/AVWarehouse/config"
 
 	"github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"

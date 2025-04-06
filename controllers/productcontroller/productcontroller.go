@@ -1,15 +1,16 @@
 package productcontroller
 
 import (
-	"1stproject/config"
-	"1stproject/entities"
-	"1stproject/models/categorymodel"
-	"1stproject/models/productmodel"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/farhanjaa/AVWarehouse/config"
+	"github.com/farhanjaa/AVWarehouse/entities"
+	"github.com/farhanjaa/AVWarehouse/models/categorymodel"
+	"github.com/farhanjaa/AVWarehouse/models/productmodel"
 )
 
 // Middleware untuk memeriksa sesi login

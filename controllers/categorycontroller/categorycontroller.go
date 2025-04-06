@@ -8,9 +8,9 @@ import (
 	"strconv"
 	"time"
 
-	"1stproject/config"
-	"1stproject/entities"
-	"1stproject/models/categorymodel"
+	"github.com/farhanjaa/AVWarehouse/config"
+	"github.com/farhanjaa/AVWarehouse/entities"
+	"github.com/farhanjaa/AVWarehouse/models/categorymodel"
 )
 
 func checkSession(w http.ResponseWriter, r *http.Request) bool {

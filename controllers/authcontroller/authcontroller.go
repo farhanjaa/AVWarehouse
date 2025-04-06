@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"os"
 
-	"1stproject/config"
-	"1stproject/entities"
-	"1stproject/libraries"
-	"1stproject/models"
+	"github.com/farhanjaa/AVWarehouse/config"
+	"github.com/farhanjaa/AVWarehouse/entities"
+	"github.com/farhanjaa/AVWarehouse/libraries"
+	"github.com/farhanjaa/AVWarehouse/models"
 
 	"golang.org/x/crypto/bcrypt"
 )

@@ -1,12 +1,13 @@
 package main
 
 import (
-	"1stproject/config"
-	authcontroller "1stproject/controllers/authcontroller"
-	"1stproject/controllers/categorycontroller"
-	"1stproject/controllers/productcontroller"
 	"log"
 	"net/http"
+
+	"github.com/farhanjaa/AVWarehouse/config"
+	authcontroller "github.com/farhanjaa/AVWarehouse/controllers/authcontroller"
+	"github.com/farhanjaa/AVWarehouse/controllers/categorycontroller"
+	"github.com/farhanjaa/AVWarehouse/controllers/productcontroller"
 
 	_ "github.com/go-sql-driver/mysql"
 )

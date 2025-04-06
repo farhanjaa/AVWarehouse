@@ -1,11 +1,12 @@
 package productmodel
 
 import (
-	"1stproject/config"
-	"1stproject/entities"
 	"database/sql"
 	"log"
 	"os"
+
+	"github.com/farhanjaa/AVWarehouse/config"
+	"github.com/farhanjaa/AVWarehouse/entities"
 
 	"github.com/joho/godotenv"
 )
@@ -87,7 +88,6 @@ func Create(product entities.Product) bool {
 		INSERT INTO products(
 			name, category_id, stock, description, created_at, updated_at
 		) VALUES (?, ?, ?, ?, ?, ?)`,
-
 		product.Name,
 		product.Category.Id,
 		product.Stock,
